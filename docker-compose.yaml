@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    container_name: notelink-app
+    restart: always
+    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/notelink
+    ports:
+      - "8005:8000"
