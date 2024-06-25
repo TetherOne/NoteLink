@@ -5,7 +5,8 @@ services:
     build: .
     container_name: notelink-app
     restart: always
-    command: sh -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    command: sh -c "alembic upgrade head &&
+                    uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
       - .:/notelink
     ports:
