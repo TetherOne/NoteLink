@@ -2,6 +2,6 @@
 ## In development
 
 ### Technologies
-- FastAPI, SQLAlchemy, Pydantic, Poetry
+- FastAPI, SQLAlchemy, Pydantic
 - PostgreSQL
 - Black, Ruff
