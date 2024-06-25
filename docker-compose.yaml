@@ -10,3 +10,14 @@ services:
       - .:/notelink
     ports:
       - "8005:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: notelink-db
+    restart: on-failure
+    env_file:
+      - ./envs/db.env
+    ports:
+      - "5435:5432"
