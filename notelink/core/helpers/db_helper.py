@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
 )
 
-from notelink.core.config import settings
+from notelink.core.settings.config import settings
 
 
 class DatabaseHelper:
