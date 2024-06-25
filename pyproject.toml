@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "notelink"
+version = "0.1.0"
+description = ""
+authors = ["Pasha Ryaguzov <pashajobber@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["uvicorn"], version = "^0.111.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
