@@ -1,4 +1,4 @@
-# Head Hunter
+# NoteLink
 ## In development
 
 ### Technologies
