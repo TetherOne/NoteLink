@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
 
-from notelink.core.helpers.db_helper import db_helper
+from notelink.core.helpers import db_helper
 
 
 @asynccontextmanager
