@@ -2,6 +2,16 @@ from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+class APIPrefix(BaseModel):
+    prefix: str = "/api"
+    version: str = "/v1"
+    notes: str = "/notes"
+
+    @property
+    def full_prefix(self) -> str:
+        return f"{self.prefix}{self.version}"
+
+
 class DatabaseConfig(BaseModel):
     url: PostgresDsn
     echo: bool = False
@@ -18,6 +28,7 @@ class Settings(BaseSettings):
         env_prefix="FAST_API_HH__",
         arbitrary_types_allowed=True,
     )
+    api: APIPrefix = APIPrefix()
     db: DatabaseConfig
 
 
