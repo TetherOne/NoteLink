@@ -1,7 +1,18 @@
+from typing import Sequence
+
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.notes.schemas import NoteCreateSchema
 from notelink.core.models import Note
+
+
+async def get_notes(
+    session: AsyncSession,
+) -> Sequence[Note]:
+    stmt = select(Note).order_by(Note.created_at.desc())
+    result = await session.scalars(stmt)
+    return result.all()
 
 
 async def create_note(

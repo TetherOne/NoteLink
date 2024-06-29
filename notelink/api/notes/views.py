@@ -11,6 +11,22 @@ from notelink.core.helpers import db_helper
 router = APIRouter(tags=["Notes"])
 
 
+@router.get(
+    "/",
+    response_model=list[NoteSchema],
+    status_code=status.HTTP_200_OK,
+)
+async def get_notes(
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+):
+    return await crud.get_notes(
+        session=session,
+    )
+
+
 @router.post(
     "/create/",
     response_model=NoteSchema,
