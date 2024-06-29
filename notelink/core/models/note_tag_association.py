@@ -20,4 +20,3 @@ class NoteTagAssociation(Base, CreateTimeMixin):
     tag_id: Mapped[int] = mapped_column(
         ForeignKey("tags.id"),
     )
-    count: Mapped[int] = mapped_column(default=1, server_default="1")

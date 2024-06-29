@@ -18,3 +18,4 @@ class Tag(
         secondary="note_tag_associations",
         back_populates="tags",
     )
+    count: Mapped[int] = mapped_column(default=1)
