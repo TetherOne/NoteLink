@@ -1,7 +1,7 @@
 from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
-from notelink.core.models import Base
+from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin
 
 
@@ -20,3 +20,4 @@ class NoteTagAssociation(Base, CreateTimeMixin):
     tag_id: Mapped[int] = mapped_column(
         ForeignKey("tags.id"),
     )
+    count: Mapped[int] = mapped_column(default=1, server_default="1")

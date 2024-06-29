@@ -2,11 +2,11 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.orm import Mapped, relationship
 
-from notelink.core.models import Base
+from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin
 
 if TYPE_CHECKING:
-    from notelink.core.models import Note
+    from notelink.core.models.note import Note
 
 
 class Tag(

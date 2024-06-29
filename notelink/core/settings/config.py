@@ -6,6 +6,7 @@ class APIPrefix(BaseModel):
     prefix: str = "/api"
     version: str = "/v1"
     notes: str = "/notes"
+    tags: str = "/tags"
 
     @property
     def full_prefix(self) -> str:
