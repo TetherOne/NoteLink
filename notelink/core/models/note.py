@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy.orm import Mapped, relationship
+from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin, UpdateTimeMixin
@@ -17,6 +17,7 @@ class Note(
 ):
     title: Mapped[str]
     text: Mapped[str]
+    is_public: Mapped[bool] = mapped_column(default=True)
     expire: Mapped[datetime]
     tags: Mapped[list["Tag"]] = relationship(
         secondary="note_tag_associations",

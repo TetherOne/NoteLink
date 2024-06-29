@@ -6,6 +6,7 @@ from pydantic import BaseModel
 class NoteBaseSchema(BaseModel):
     title: str
     text: str
+    is_public: bool
     expire: datetime
 
 
