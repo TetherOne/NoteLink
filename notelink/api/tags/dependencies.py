@@ -1,12 +1,12 @@
 from typing import Annotated
 
-from fastapi import Depends, Path, HTTPException
+from fastapi import Depends, Path
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import status
 
 from notelink.api.tags import crud
 from notelink.core.helpers import db_helper
 from notelink.core.models import Tag
+from notelink.tools.errors import NotFound
 
 
 async def tag_by_id(
@@ -26,8 +26,4 @@ async def tag_by_id(
     )
     if tag is not None:
         return tag
-
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail=f"Tag with {tag_id} id not found.",
-    )
+    raise NotFound()
