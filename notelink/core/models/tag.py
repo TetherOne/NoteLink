@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy.orm import Mapped, relationship
+from sqlalchemy.orm import Mapped, relationship, mapped_column
 
 from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin
@@ -13,7 +13,7 @@ class Tag(
     Base,
     CreateTimeMixin,
 ):
-    name: Mapped[str]
+    name: Mapped[str] = mapped_column(unique=True)
     notes: Mapped[list["Note"]] = relationship(
         secondary="note_tag_associations",
         back_populates="tags",

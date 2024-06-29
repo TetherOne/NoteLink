@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 class TagBaseSchema(BaseModel):
@@ -13,4 +13,6 @@ class TagSchema(TagBaseSchema):
 
 
 class TagCreateSchema(TagBaseSchema):
-    pass
+    @field_validator("name")
+    def lowercase_name(cls, value: str) -> str:
+        return value.lower()
