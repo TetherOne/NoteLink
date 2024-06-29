@@ -11,6 +11,23 @@ from notelink.core.helpers import db_helper
 router = APIRouter(tags=["Tags"])
 
 
+@router.get(
+    "/check/",
+    response_model=bool,
+)
+async def check_tag_endpoint(
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+    tag_name: str,
+) -> bool:
+    return await crud.check_tag(
+        session=session,
+        tag_name=tag_name,
+    )
+
+
 @router.post(
     "/create/",
     response_model=TagSchema,
@@ -24,6 +41,6 @@ async def create_tag(
     tag_create: TagCreateSchema,
 ):
     return await crud.create_tag(
-        tag_create=tag_create,
         session=session,
+        tag_create=tag_create,
     )
