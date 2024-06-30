@@ -18,6 +18,8 @@ class Note(
     title: Mapped[str]
     text: Mapped[str]
     is_public: Mapped[bool] = mapped_column(default=True)
+    url: Mapped[str | None]
+    private_url: Mapped[str | None]
     expire: Mapped[datetime]
     tags: Mapped[list["Tag"]] = relationship(
         secondary="note_tag_associations",

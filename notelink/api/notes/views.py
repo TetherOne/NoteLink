@@ -1,7 +1,8 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi import status
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.notes import crud
@@ -30,7 +31,7 @@ async def get_notes(
 
 
 @router.get(
-    "/<note_id>/",
+    "/{note_id}/",
     response_model=NoteSchema,
     status_code=status.HTTP_200_OK,
 )
@@ -56,3 +57,33 @@ async def create_note(
         note_create=note_create,
         session=session,
     )
+
+
+@router.get("/public/note/{note_id}", response_model=NoteSchema)
+async def get_public_note(
+    note_id: str,
+    session: AsyncSession = Depends(db_helper.session_getter),
+):
+    result = await session.execute(
+        select(Note).filter(Note.url == f"http://notelink/public/note/{note_id}")
+    )
+    note = result.scalars().first()
+    if not note:
+        raise HTTPException(status_code=404, detail="Note not found")
+    return note
+
+
+@router.get("/note/{note_id}", response_model=NoteSchema)
+async def get_private_note(
+    note_id: str,
+    session: AsyncSession = Depends(db_helper.session_getter),
+):
+    result = await session.execute(
+        select(Note).filter(
+            Note.private_url == f"http://notelink/private/note/{note_id}"
+        )
+    )
+    note = result.scalars().first()
+    if not note:
+        raise HTTPException(status_code=404, detail="Note not found")
+    return note
