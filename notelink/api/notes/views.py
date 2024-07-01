@@ -2,19 +2,20 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends
 from fastapi import status
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.notes import crud
-from notelink.api.notes.dependencies import note_by_id
 from notelink.api.notes.schemas import NoteSchema, NoteCreateSchema
 from notelink.core.helpers import db_helper
 from notelink.core.models import Note
+from notelink.tools.errors import NotFound
 
 router = APIRouter(tags=["Notes"])
 
 
 @router.get(
-    "/",
+    "/public/",
     response_model=list[NoteSchema],
     status_code=status.HTTP_200_OK,
 )
@@ -27,17 +28,6 @@ async def get_notes(
     return await crud.get_notes(
         session=session,
     )
-
-
-@router.get(
-    "/<note_id>/",
-    response_model=NoteSchema,
-    status_code=status.HTTP_200_OK,
-)
-async def get_note(
-    note: Note = Depends(note_by_id),
-):
-    return note
 
 
 @router.post(
@@ -56,3 +46,45 @@ async def create_note(
         note_create=note_create,
         session=session,
     )
+
+
+@router.get(
+    "/public/{public_id}",
+    response_model=NoteSchema,
+    status_code=status.HTTP_200_OK,
+)
+async def get_public_note(
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+    public_id: str,
+):
+    public_notes = await session.execute(
+        select(Note).filter(Note.public_id == public_id)
+    )
+    note = public_notes.scalars().first()
+    if not note:
+        raise NotFound()
+    return note
+
+
+@router.get(
+    "/private/{private_id}",
+    response_model=NoteSchema,
+    status_code=status.HTTP_200_OK,
+)
+async def get_private_note(
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
+    private_id: str,
+):
+    private_notes = await session.execute(
+        select(Note).filter(Note.private_id == private_id),
+    )
+    note = private_notes.scalars().first()
+    if not note:
+        raise NotFound()
+    return note
