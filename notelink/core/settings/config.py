@@ -21,6 +21,10 @@ class DatabaseConfig(BaseModel):
     max_overflow: int = 10
 
 
+class AccessTokenConfig(BaseModel):
+    lifetime_seconds: int = 3600
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file="envs/.main-env",
@@ -31,6 +35,7 @@ class Settings(BaseSettings):
     )
     api: APIPrefix = APIPrefix()
     db: DatabaseConfig
+    access_token: AccessTokenConfig = AccessTokenConfig()
 
 
 settings = Settings()
