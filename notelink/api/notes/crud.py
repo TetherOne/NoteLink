@@ -22,10 +22,10 @@ async def create_note(
     session: AsyncSession,
     note_create: NoteCreateSchema,
 ) -> Note:
-    url, private_url = create_public_and_private(note_create)
+    public_id, private_id = create_public_and_private(note_create)
     note_data = note_create.dict()
-    note_data["url"] = url
-    note_data["private_url"] = private_url
+    note_data["public_id"] = public_id
+    note_data["private_id"] = private_id
     note = Note(**note_data)
     session.add(note)
     await session.commit()

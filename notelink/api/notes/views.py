@@ -49,7 +49,7 @@ async def create_note(
 
 
 @router.get(
-    "/public/{note_id}",
+    "/public/{public_id}",
     response_model=NoteSchema,
     status_code=status.HTTP_200_OK,
 )
@@ -58,9 +58,11 @@ async def get_public_note(
         AsyncSession,
         Depends(db_helper.session_getter),
     ],
-    note_id: str,
+    public_id: str,
 ):
-    public_notes = await session.execute(select(Note).filter(Note.url == note_id))
+    public_notes = await session.execute(
+        select(Note).filter(Note.public_id == public_id)
+    )
     note = public_notes.scalars().first()
     if not note:
         raise NotFound()
@@ -68,7 +70,7 @@ async def get_public_note(
 
 
 @router.get(
-    "/private/{note_id}",
+    "/private/{private_id}",
     response_model=NoteSchema,
     status_code=status.HTTP_200_OK,
 )
@@ -77,10 +79,10 @@ async def get_private_note(
         AsyncSession,
         Depends(db_helper.session_getter),
     ],
-    note_id: str,
+    private_id: str,
 ):
     private_notes = await session.execute(
-        select(Note).filter(Note.private_url == note_id),
+        select(Note).filter(Note.private_id == private_id),
     )
     note = private_notes.scalars().first()
     if not note:

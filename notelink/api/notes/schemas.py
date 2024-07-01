@@ -12,8 +12,8 @@ class NoteBaseSchema(BaseModel):
 
 class NoteSchema(NoteBaseSchema):
     id: int
-    url: str | None
-    private_url: str | None
+    public_id: str | None
+    private_id: str | None
     created_at: datetime
     updated_at: datetime
 
