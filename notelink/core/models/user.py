@@ -5,6 +5,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 
 from notelink.core.models import Base
 from notelink.core.models.mixins import CreateTimeMixin
+from notelink.core.types.user_id import UserId
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
 class User(
     Base,
     CreateTimeMixin,
-    SQLAlchemyBaseUserTable[int],
+    SQLAlchemyBaseUserTable[UserId],
 ):
     @classmethod
     def get_db(cls, session: "AsyncSession"):
