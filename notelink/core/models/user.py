@@ -5,6 +5,7 @@ from fastapi_users_db_sqlalchemy import (
     SQLAlchemyUserDatabase,
 )
 from notelink.core.models.base import Base
+from notelink.core.models.mixins.id_int_pk import IdIntPkMixin
 from notelink.core.types.user_id import UserId
 
 if TYPE_CHECKING:
@@ -13,6 +14,7 @@ if TYPE_CHECKING:
 
 class User(
     Base,
+    IdIntPkMixin,
     SQLAlchemyBaseUserTable[UserId],
 ):
     @classmethod

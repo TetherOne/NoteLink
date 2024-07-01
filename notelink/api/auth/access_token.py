@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Annotated
 from fastapi import Depends
 
 from notelink.core.helpers import db_helper
-from notelink.core.models import AccessToken
+from notelink.core.models.access_token import AccessToken
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
