@@ -7,7 +7,7 @@ from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin, UpdateTimeMixin
 
 if TYPE_CHECKING:
-    from notelink.core.models import Tag
+    from notelink.core.models.tag import Tag
 
 
 class Note(

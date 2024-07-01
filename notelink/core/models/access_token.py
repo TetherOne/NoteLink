@@ -7,7 +7,7 @@ from fastapi_users_db_sqlalchemy.access_token import (
 from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
-from notelink.core.models import Base
+from notelink.core.models.base import Base
 from notelink.core.types.user_id import UserId
 
 

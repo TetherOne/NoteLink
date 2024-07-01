@@ -1,9 +1,10 @@
 from typing import TYPE_CHECKING
 
-from fastapi_users.db import SQLAlchemyBaseUserTable
-from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
-
-from notelink.core.models import Base
+from fastapi_users_db_sqlalchemy import (
+    SQLAlchemyBaseUserTable,
+    SQLAlchemyUserDatabase,
+)
+from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin
 from notelink.core.types.user_id import UserId
 

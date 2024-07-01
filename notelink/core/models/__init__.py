@@ -3,9 +3,11 @@ __all__ = (
     "Note",
     "Tag",
     "User",
+    "AccessToken",
     "NoteTagAssociation",
 )
 
+from notelink.core.models.access_token import AccessToken
 from notelink.core.models.note_tag_association import NoteTagAssociation
 from notelink.core.models.note import Note
 from notelink.core.models.base import Base
