@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from notelink.api.notes import crud
 from notelink.api.notes.schemas import NoteSchema, NoteCreateSchema
 from notelink.core.helpers import db_helper
-from notelink.core.models import Note
+from notelink.core.models.note import Note
 from notelink.tools.errors import NotFound
 
 router = APIRouter(tags=["Notes"])

@@ -4,7 +4,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.notes.schemas import NoteCreateSchema
-from notelink.core.models import Note
+from notelink.core.models.note import Note
 from notelink.tools.utils import create_public_and_private
 
 

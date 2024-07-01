@@ -13,6 +13,6 @@ async def get_user_manager(
     users_db: Annotated[
         "SQLAlchemyUserDatabase",
         Depends(get_users_db),
-    ],
+    ]
 ):
     yield UserManager(users_db)

@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.tags.schemas import TagCreateSchema
-from notelink.core.models import Tag
+from notelink.core.models.tag import Tag
 
 
 async def get_tag(

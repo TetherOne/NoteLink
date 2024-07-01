@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.tags import crud
 from notelink.core.helpers import db_helper
-from notelink.core.models import Tag
+from notelink.core.models.tag import Tag
 from notelink.tools.errors import NotFound
 
 
