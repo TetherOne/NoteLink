@@ -1,6 +1,6 @@
 from fastapi_users import schemas
 
-from notelink.core.types.user_id import UserId
+from notelink.core.models.types.user_id import UserId
 
 
 class UserRead(schemas.BaseUser[UserId]):

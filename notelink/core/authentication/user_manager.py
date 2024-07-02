@@ -5,7 +5,7 @@ from fastapi_users import BaseUserManager, IntegerIDMixin
 
 from notelink.core.models import User
 from notelink.core.settings.config import settings
-from notelink.core.types.user_id import UserId
+from notelink.core.models.types.user_id import UserId
 
 if TYPE_CHECKING:
     from fastapi import Request

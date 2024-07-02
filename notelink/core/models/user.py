@@ -6,7 +6,7 @@ from fastapi_users_db_sqlalchemy import (
 )
 from notelink.core.models.base import Base
 from notelink.core.models.mixins.id_int_pk import IdIntPkMixin
-from notelink.core.types.user_id import UserId
+from notelink.core.models.types.user_id import UserId
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

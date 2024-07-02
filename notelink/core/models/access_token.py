@@ -14,7 +14,7 @@ from sqlalchemy.orm import (
 )
 
 from .base import Base
-from ..types.user_id import UserId
+from notelink.core.models.types.user_id import UserId
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
