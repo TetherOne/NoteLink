@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from notelink.api.auth.backend import authentication_backend
-from notelink.api.auth.schemas import UserRead, UserCreate
+from notelink.api.auth.schemas import UserCreate, UserRead
 from notelink.api.auth.user_routers import fastapi_users
 from notelink.core.settings.config import settings
 
