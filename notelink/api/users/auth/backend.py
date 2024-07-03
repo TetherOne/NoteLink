@@ -1,7 +1,7 @@
 from fastapi_users.authentication import AuthenticationBackend
 
 from notelink.api.users.dependencies import get_database_strategy
-from notelink.core.authentication.transport import bearer_transport
+from notelink.api.users.auth.transport import bearer_transport
 
 
 authentication_backend = AuthenticationBackend(

@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING, Annotated
 from fastapi import Depends
 from fastapi_users.authentication.strategy import DatabaseStrategy
 
-from notelink.core.authentication.user_manager import UserManager
+from notelink.api.users.auth.user_manager import UserManager
 from notelink.core.helpers import db_helper
 from notelink.core.models import AccessToken, User
 from notelink.core.settings.config import settings
