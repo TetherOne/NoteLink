@@ -1,8 +1,8 @@
 """create tag table
 
-Revision ID: fe8bb8b9e620
-Revises: a2aa55b9636c
-Create Date: 2024-06-28 21:19:23.719057
+Revision ID: 3f2541ab4275
+Revises: 4d9a5938b6f2
+Create Date: 2024-07-02 00:12:04.741018
 
 """
 
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "fe8bb8b9e620"
-down_revision: Union[str, None] = "a2aa55b9636c"
+revision: str = "3f2541ab4275"
+down_revision: Union[str, None] = "4d9a5938b6f2"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
@@ -23,6 +23,7 @@ def upgrade() -> None:
     op.create_table(
         "tags",
         sa.Column("name", sa.String(), nullable=False),
+        sa.Column("count", sa.Integer(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column(
             "created_at",
@@ -31,6 +32,7 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint("name"),
     )
 
 

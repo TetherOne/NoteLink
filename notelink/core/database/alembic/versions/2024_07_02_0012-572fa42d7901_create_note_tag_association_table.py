@@ -1,8 +1,8 @@
-"""create note_tag_association table
+"""create note tag association table
 
-Revision ID: a63c1907b162
-Revises: fe8bb8b9e620
-Create Date: 2024-06-29 19:36:38.887316
+Revision ID: 572fa42d7901
+Revises: 3f2541ab4275
+Create Date: 2024-07-02 00:12:37.287247
 
 """
 
@@ -13,8 +13,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "a63c1907b162"
-down_revision: Union[str, None] = "fe8bb8b9e620"
+revision: str = "572fa42d7901"
+down_revision: Union[str, None] = "3f2541ab4275"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

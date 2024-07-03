@@ -3,9 +3,10 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 from notelink.core.models.base import Base
 from notelink.core.models.mixins import CreateTimeMixin
+from notelink.core.models.mixins.id_int_pk import IdIntPkMixin
 
 
-class NoteTagAssociation(Base, CreateTimeMixin):
+class NoteTagAssociation(Base, IdIntPkMixin, CreateTimeMixin):
     __table_args__ = (
         UniqueConstraint(
             "note_id",

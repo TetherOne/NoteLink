@@ -1,8 +1,8 @@
 """create note table
 
-Revision ID: a2aa55b9636c
+Revision ID: 4d9a5938b6f2
 Revises:
-Create Date: 2024-06-28 21:13:57.164008
+Create Date: 2024-07-02 00:11:18.374771
 
 """
 
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = "a2aa55b9636c"
+revision: str = "4d9a5938b6f2"
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,6 +24,9 @@ def upgrade() -> None:
         "notes",
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("text", sa.String(), nullable=False),
+        sa.Column("is_public", sa.Boolean(), nullable=False),
+        sa.Column("public_id", sa.String(), nullable=True),
+        sa.Column("private_id", sa.String(), nullable=True),
         sa.Column("expire", sa.DateTime(), nullable=False),
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column(
