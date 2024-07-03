@@ -7,12 +7,17 @@ class APIPrefix(BaseModel):
     version: str = "/v1"
     notes: str = "/notes"
     tags: str = "/tags"
-    auth: str = "/auth"
     users: str = "/users"
+    auth: str = "/auth"
+    login: str = "/login"
 
     @property
     def full_prefix(self) -> str:
         return f"{self.prefix}{self.version}"
+
+    @property
+    def full_prefix_for_bearer_transport(self) -> str:
+        return f"{self.full_prefix}{self.auth}{self.login}"
 
 
 class DatabaseConfig(BaseModel):

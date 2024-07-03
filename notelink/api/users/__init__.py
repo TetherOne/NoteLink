@@ -16,4 +16,9 @@ fastapi_users = FastAPIUsers[User, UserId](
 )
 
 
-router.include_router(fastapi_users.get_users_router(UserRead, UserUpdate))
+router.include_router(
+    fastapi_users.get_users_router(
+        UserRead,
+        UserUpdate,
+    ),
+)
