@@ -4,7 +4,7 @@ services:
   app:
     build: .
     container_name: notelink-app
-    restart: always
+    restart: on-failure
     command: sh -c "alembic upgrade head &&
                     uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
@@ -13,6 +13,8 @@ services:
       - "8005:8000"
     depends_on:
       - db
+      - rabbitmq
+      - worker
 
   db:
     image: postgres
@@ -22,3 +24,26 @@ services:
       - ./envs/db.env
     ports:
       - "5435:5432"
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: rabbitmq:3-management
+    restart: on-failure
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "15670:15672"
+      - "5670:5672"
+
+  worker:
+    build:
+      context: .
+    restart: on-failure
+    command: celery -A notelink.api.notes.tasks worker -l info
+    volumes:
+      - .:/notelink
+    depends_on:
+      - rabbitmq

@@ -14,6 +14,8 @@ sqlalchemy = {extras = ["asyncio"], version = "^2.0.31"}
 pydantic-settings = "^2.3.4"
 asyncpg = "^0.29.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
+celery = "^5.4.0"
+rabbitmq = "^0.2.0"
 
 
 [tool.poetry.group.lint.dependencies]
