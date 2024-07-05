@@ -16,9 +16,11 @@ asyncpg = "^0.29.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
 
 
-[tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
-ruff = "^0.4.10"
+[tool.poetry.group.lint.dependencies]
+black = "^23.3.0"
+ruff = "^0.1.8"
+pre-commit = "^3.3.3"
+
 
 [build-system]
 requires = ["poetry-core"]
