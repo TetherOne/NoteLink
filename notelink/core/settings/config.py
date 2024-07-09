@@ -43,7 +43,7 @@ class AccessTokenConfig(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=("envs/.main-env", "envs/s3.env"),
+        env_file=("envs/app.env", "envs/s3.env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="FAST_API_HH__",
