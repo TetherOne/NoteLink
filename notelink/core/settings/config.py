@@ -2,6 +2,13 @@ from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+class S3StorageConfig(BaseSettings):
+    access: str
+    secret: str
+    url: str
+    bucket_name: str
+
+
 class APIPrefix(BaseModel):
     prefix: str = "/api"
     version: str = "/v1"
@@ -36,7 +43,7 @@ class AccessTokenConfig(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file="envs/.main-env",
+        env_file=("envs/.main-env", "envs/s3.env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="FAST_API_HH__",
@@ -45,6 +52,7 @@ class Settings(BaseSettings):
     api: APIPrefix = APIPrefix()
     db: DatabaseConfig
     access_token: AccessTokenConfig
+    s3: S3StorageConfig
 
 
 settings = Settings()
