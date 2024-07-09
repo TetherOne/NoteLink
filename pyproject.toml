@@ -16,6 +16,7 @@ asyncpg = "^0.29.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
 celery = "^5.4.0"
 rabbitmq = "^0.2.0"
+aiobotocore = "^2.13.1"
 
 
 [tool.poetry.group.lint.dependencies]
