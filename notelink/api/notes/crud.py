@@ -18,13 +18,6 @@ async def get_notes(
     return public_notes.all()
 
 
-async def get_note(
-    session: AsyncSession,
-    note_id: int,
-) -> Note | None:
-    return await session.get(Note, note_id)
-
-
 async def create_note(
     session: AsyncSession,
     note_create: NoteCreateSchema,

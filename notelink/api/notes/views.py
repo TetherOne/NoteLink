@@ -6,8 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from notelink.api.notes import crud
-from notelink.api.notes.dependencies import note_by_id
-from notelink.api.notes.schemas import NoteSchema, NoteCreateSchema, NoteUpdateSchema
+from notelink.api.notes.schemas import NoteSchema, NoteCreateSchema
 from notelink.core.helpers import db_helper
 from notelink.core.models.note import Note
 from notelink.tools.errors import NotFound
@@ -89,22 +88,3 @@ async def get_private_note(
     if not note:
         raise NotFound()
     return note
-
-
-@router.patch(
-    "/update/{note_id}/",
-    status_code=status.HTTP_201_CREATED,
-)
-async def update_note(
-    session: Annotated[
-        AsyncSession,
-        Depends(db_helper.session_getter),
-    ],
-    note_update: NoteUpdateSchema,
-    note: Note = Depends(note_by_id),
-):
-    return await crud.update_note(
-        session=session,
-        note=note,
-        note_update=note_update,
-    )
