@@ -1,15 +1,15 @@
-from fastapi_users import schemas
+from fastapi_users.schemas import BaseUser, BaseUserCreate, BaseUserUpdate
 
 from notelink.core.models.types.user_id import UserId
 
 
-class UserRead(schemas.BaseUser[UserId]):
+class UserRead(BaseUser[UserId]):
     pass
 
 
-class UserCreate(schemas.BaseUserCreate):
+class UserCreate(BaseUserCreate):
     pass
 
 
-class UserUpdate(schemas.BaseUserUpdate):
+class UserUpdate(BaseUserUpdate):
     pass
