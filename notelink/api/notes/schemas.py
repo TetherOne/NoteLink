@@ -20,10 +20,3 @@ class NoteSchema(NoteBaseSchema):
 
 class NoteCreateSchema(NoteBaseSchema):
     pass
-
-
-class NoteUpdateSchema(NoteBaseSchema):
-    title: str | None = None
-    text: str | None = None
-    is_public: bool | None = None
-    expire: datetime | None = None
