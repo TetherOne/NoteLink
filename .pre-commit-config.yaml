@@ -3,19 +3,27 @@ repos:
     rev: "v3.2.0"
     hooks:
       - id: trailing-whitespace
+        exclude: frontend/
       - id: end-of-file-fixer
+        exclude: frontend/
       - id: check-yaml
+        exclude: frontend/
       - id: check-added-large-files
+        exclude: frontend/
       - id: mixed-line-ending
+        exclude: frontend/
       - id: requirements-txt-fixer
+        exclude: frontend/
 
   - repo: https://github.com/psf/black
     rev: "23.3.0"
     hooks:
       - id: black
+        exclude: frontend/
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
     rev: "v0.1.8"
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix, --unsafe-fixes]
+        exclude: frontend/
