@@ -7,7 +7,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-from notelink.core.models import Base
+from notelink.core.models.base import Base
 from notelink.core.settings.config import settings
 
 # this is the Alembic Config object, which provides
