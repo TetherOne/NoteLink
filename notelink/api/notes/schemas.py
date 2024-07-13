@@ -1,11 +1,10 @@
 from datetime import datetime
-
 from pydantic import BaseModel
 
 
 class NoteBaseSchema(BaseModel):
     title: str
-    text: str
+    text: str | None = None
     is_public: bool
     user_id: int
     expire: datetime
@@ -18,6 +17,11 @@ class NoteSchema(NoteBaseSchema):
     user_id: int | None
     created_at: datetime
     updated_at: datetime
+    s3_key: str | None
+
+    class Config:
+        orm_mode = True
+        from_attributes = True
 
 
 class NoteCreateSchema(NoteBaseSchema):

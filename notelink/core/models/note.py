@@ -20,7 +20,7 @@ class Note(
     UpdateTimeMixin,
 ):
     title: Mapped[str]
-    text: Mapped[str]
+    s3_key: Mapped[str | None]
     is_public: Mapped[bool] = mapped_column(default=True)
     public_id: Mapped[str | None]
     private_id: Mapped[str | None]
