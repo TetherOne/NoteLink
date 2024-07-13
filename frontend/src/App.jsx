@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PublicNotes from "./components/PublicNotes.jsx";
 
 const App = () => {
-  useEffect(() => {
-    axios.get("http://127.0.0.1:8005/api/v1/notes/public/").then(
-      (response) => {
-      console.log(response.data);
-    });
-  }, []);
-
   return (
-    <div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/public-notes" element={<PublicNotes />} />
+      </Routes>
+    </Router>
   );
 }
 
