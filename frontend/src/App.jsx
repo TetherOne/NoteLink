@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PublicNotes from "./components/PublicNotes.jsx";
+import PublicNotes from "./components/public-notes/PublicNotes.jsx";
 
 const App = () => {
   return (
