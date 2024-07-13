@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 class NoteBaseSchema(BaseModel):
     title: str
-    text: str
+    text: str | None = None  # Делаем поле необязательным
     is_public: bool
     user_id: int
     expire: datetime
@@ -18,6 +18,10 @@ class NoteSchema(NoteBaseSchema):
     created_at: datetime
     updated_at: datetime
     s3_key: str | None
+
+    class Config:
+        orm_mode = True
+        from_attributes = True  # Это позволяет использовать from_orm
 
 
 class NoteCreateSchema(NoteBaseSchema):

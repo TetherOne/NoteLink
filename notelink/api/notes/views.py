@@ -11,6 +11,7 @@ from notelink.api.notes.schemas import NoteSchema, NoteCreateSchema
 from notelink.api.users.auth.dependencies import get_current_verified_user
 from notelink.core.helpers import db_helper
 from notelink.core.models.note import Note
+from notelink.core.s3 import s3_client
 from notelink.tools.errors import NotFound
 
 router = APIRouter(tags=["Notes"])
@@ -68,7 +69,12 @@ async def get_public_note(
     note = public_notes.scalars().first()
     if not note:
         raise NotFound()
-    return note
+
+    note_data = NoteSchema.from_orm(note).dict()
+    if note.s3_key:
+        note_data["text"] = await s3_client.get_text(note.s3_key)
+
+    return NoteSchema(**note_data)
 
 
 @router.get(
@@ -87,4 +93,9 @@ async def get_private_note(
     note = private_notes.scalars().first()
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-    return note
+
+    note_data = NoteSchema.from_orm(note).dict()
+    if note.s3_key:
+        note_data["text"] = await s3_client.get_text(note.s3_key)
+
+    return NoteSchema(**note_data)
