@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from pydantic import BaseModel
 
 
@@ -18,6 +17,7 @@ class NoteSchema(NoteBaseSchema):
     user_id: int | None
     created_at: datetime
     updated_at: datetime
+    s3_key: str | None
 
 
 class NoteCreateSchema(NoteBaseSchema):
