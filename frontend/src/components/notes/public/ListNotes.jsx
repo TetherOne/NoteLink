@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import NotesTable from "./NotesTable.jsx";
+import Notes from "../../../pages/notes/public/Notes.jsx";
 
-const PublicNotes = () => {
+const ListNotes = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
@@ -13,8 +13,8 @@ const PublicNotes = () => {
   }, []);
 
   return (
-    <NotesTable notes={notes} />
+    <Notes notes={notes} />
   );
 }
 
-export default PublicNotes;
+export default ListNotes;

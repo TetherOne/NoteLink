@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -11,7 +12,7 @@ const formatDate = (dateString) => {
   return `${hours}:${minutes}:${seconds} ${day}.${month}.${year}`;
 };
 
-const NotesTable = ({ notes }) => {
+const Notes = ({ notes }) => {
   return (
     <div className="card d-flex" style={{ width: '48rem' }}>
       <div className="card-body">
@@ -27,12 +28,12 @@ const NotesTable = ({ notes }) => {
             <tr key={index}>
               <td scope="row" className="text-nowrap"></td>
               <td className="text-start">
-                <a href="#" className="font-weight-bold blue-text">
+                <Link to={`/notes/public/${note.id}`} className="font-weight-bold blue-text">
                   {note.title}
-                </a>
+                </Link>
                 <div className="my-2">
                   <a href="#" className="blue-text">
-                    <strong>{note.author}</strong>
+                    <strong>{note.text}</strong>
                   </a>
                   <span>{formatDate(note.created_at)}</span>
                   <div></div>
@@ -53,4 +54,4 @@ const NotesTable = ({ notes }) => {
   );
 };
 
-export default NotesTable;
+export default Notes;

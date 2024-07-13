@@ -1,14 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import PublicNotes from "./components/public-notes/PublicNotes.jsx";
-import PrivateNotes from "./components/private-notes/PrivateNotes.jsx";
+import ListNotes from "./components/notes/public/ListNotes.jsx";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/public-notes" element={<PublicNotes />} />
-        <Route path="/private-notes/:private_id" element={<PrivateNotes />} />
+        <Route path="/notes/public" element={<ListNotes />} />
       </Routes>
     </Router>
   );
