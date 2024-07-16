@@ -18,14 +18,12 @@ async def get_notes(
     )
     public_notes = await session.scalars(notes_query)
     notes = public_notes.all()
-
     notes_data = []
     for note in notes:
         note_data = NoteSchema.from_orm(note).dict()
         if note.s3_key:
             note_data["text"] = await s3_client.get_text(note.s3_key)
         notes_data.append(NoteSchema(**note_data))
-
     return notes_data
 
 

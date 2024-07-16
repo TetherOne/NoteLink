@@ -69,11 +69,9 @@ async def get_public_note(
     note = public_notes.scalars().first()
     if not note:
         raise NotFound()
-
     note_data = NoteSchema.from_orm(note).dict()
     if note.s3_key:
         note_data["text"] = await s3_client.get_text(note.s3_key)
-
     return NoteSchema(**note_data)
 
 
@@ -93,9 +91,7 @@ async def get_private_note(
     note = private_notes.scalars().first()
     if not note:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-
     note_data = NoteSchema.from_orm(note).dict()
     if note.s3_key:
         note_data["text"] = await s3_client.get_text(note.s3_key)
-
     return NoteSchema(**note_data)
