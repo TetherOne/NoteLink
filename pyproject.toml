@@ -17,6 +17,8 @@ fastapi-users = {extras = ["sqlalchemy"], version = "^13.0.0"}
 celery = "^5.4.0"
 rabbitmq = "^0.2.0"
 aiobotocore = "^2.13.1"
+aioredis = "^2.0.1"
+redis = "^5.0.7"
 
 
 [tool.poetry.group.lint.dependencies]

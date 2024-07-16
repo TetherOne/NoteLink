@@ -13,6 +13,7 @@ from notelink.core.helpers import db_helper
 from notelink.core.models.note import Note
 from notelink.core.s3 import s3_client
 from notelink.tools.errors import NotFound
+from notelink.tools.utils import cache_decorator
 
 router = APIRouter(tags=["Notes"])
 
@@ -22,15 +23,15 @@ router = APIRouter(tags=["Notes"])
     response_model=list[NoteSchema],
     status_code=status.HTTP_200_OK,
 )
+@cache_decorator("notes")
 async def get_notes(
     session: Annotated[
         AsyncSession,
         Depends(db_helper.session_getter),
     ],
 ):
-    return await crud.get_notes(
-        session=session,
-    )
+    notes = await crud.get_notes(session)
+    return [NoteSchema.from_orm(note).dict() for note in notes]
 
 
 @router.post(

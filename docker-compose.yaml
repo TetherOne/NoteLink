@@ -13,6 +13,7 @@ services:
       - "8005:8000"
     depends_on:
       - db
+      - redis
 
   db:
     image: postgres
@@ -22,3 +23,10 @@ services:
       - ./envs/db.env
     ports:
       - "5435:5432"
+
+  redis:
+    image: redis
+    container_name: notelink-cache
+    restart: on-failure
+    ports:
+      - "6380:6379"

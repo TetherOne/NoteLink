@@ -1,6 +1,27 @@
 import base64
+import functools
 import re
 import uuid
+
+from notelink.core.helpers.cache_helper import AsyncRedisCache
+
+cache = AsyncRedisCache()
+
+
+def cache_decorator(cache_key: str):
+    def decorator(func):
+        @functools.wraps(func)
+        async def wrapper(*args, **kwargs):
+            cached_result = await cache.get(cache_key)
+            if cached_result:
+                return cached_result
+            result = await func(*args, **kwargs)
+            await cache.set(cache_key, result)
+            return result
+
+        return wrapper
+
+    return decorator
 
 
 def generate_public_id():

@@ -2,6 +2,12 @@ from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
+class RedisConfig(BaseModel):
+    url: str = "envs/redis.env"
+    port: int = "envs/redis.env"
+    db: int = "envs/redis.env"
+
+
 class S3StorageConfig(BaseModel):
     access: str
     secret: str
@@ -43,7 +49,7 @@ class AccessTokenConfig(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=("envs/app.env", "envs/s3.env"),
+        env_file=("envs/app.env", "envs/s3.env", "envs/redis.env"),
         case_sensitive=False,
         env_nested_delimiter="__",
         env_prefix="FAST_API_HH__",
@@ -53,6 +59,7 @@ class Settings(BaseSettings):
     db: DatabaseConfig
     access_token: AccessTokenConfig
     s3: S3StorageConfig
+    cache: RedisConfig = RedisConfig()
 
 
 settings = Settings()
