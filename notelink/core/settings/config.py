@@ -59,7 +59,7 @@ class Settings(BaseSettings):
     db: DatabaseConfig
     access_token: AccessTokenConfig
     s3: S3StorageConfig
-    cache: RedisConfig = RedisConfig()
+    cache: RedisConfig
 
 
 settings = Settings()
