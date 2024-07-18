@@ -21,7 +21,7 @@ class AsyncRedisCache:
             decode_responses=True,
         )
 
-    async def set(self, key: str, value: dict, expire: int = 10):
+    async def set(self, key: str, value: dict, expire: int = 15):
         value = json.dumps(value, default=str)
         await self.redis.set(key, value, ex=expire)
 

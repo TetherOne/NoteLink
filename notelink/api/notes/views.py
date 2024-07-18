@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi import status
 from fastapi_users.schemas import BaseUser
 from sqlalchemy import select
@@ -13,6 +13,7 @@ from notelink.core.helpers import db_helper
 from notelink.core.models.note import Note
 from notelink.core.s3 import s3_client
 from notelink.tools.errors import NotFound
+from notelink.tools.messages import notes_limit, notes_skip
 from notelink.tools.utils import cache_decorator
 
 router = APIRouter(tags=["Notes"])
@@ -29,8 +30,10 @@ async def get_notes(
         AsyncSession,
         Depends(db_helper.session_getter),
     ],
+    skip: int = Query(0, description=notes_skip),
+    limit: int = Query(10, description=notes_limit),
 ):
-    notes = await crud.get_notes(session)
+    notes = await crud.get_notes(session, skip=skip, limit=limit)
     return [NoteSchema.from_orm(note).dict() for note in notes]
 
 

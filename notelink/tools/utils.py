@@ -1,7 +1,8 @@
 import base64
-import functools
 import re
 import uuid
+from functools import wraps
+from typing import Callable
 
 from notelink.core.helpers.cache_helper import AsyncRedisCache
 
@@ -9,14 +10,19 @@ cache = AsyncRedisCache()
 
 
 def cache_decorator(cache_key: str):
-    def decorator(func):
-        @functools.wraps(func)
+    def decorator(func: Callable):
+        @wraps(func)
         async def wrapper(*args, **kwargs):
-            cached_result = await cache.get(cache_key)
-            if cached_result:
-                return cached_result
+            skip = kwargs.get("skip", 0)
+            limit = kwargs.get("limit", 10)
+            key = f"{cache_key}_skip{skip}_limit{limit}"
+            cache = AsyncRedisCache()
+            cached_data = await cache.get(key)
+            if cached_data:
+                return cached_data
+
             result = await func(*args, **kwargs)
-            await cache.set(cache_key, result)
+            await cache.set(key, result)
             return result
 
         return wrapper

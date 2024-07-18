@@ -11,10 +11,14 @@ from notelink.tools.utils import create_public_and_private
 
 
 async def get_notes(
-    session: AsyncSession,
+    session: AsyncSession, skip: int, limit: int
 ) -> Sequence[NoteSchema]:
     notes_query = (
-        select(Note).where(Note.private_id.is_(None)).order_by(Note.created_at.desc())
+        select(Note)
+        .where(Note.private_id.is_(None))
+        .order_by(Note.created_at.desc())
+        .offset(skip)
+        .limit(limit)
     )
     public_notes = await session.scalars(notes_query)
     notes = public_notes.all()
