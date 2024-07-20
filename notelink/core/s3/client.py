@@ -29,40 +29,6 @@ class S3Client:
         ) as client:
             yield client
 
-    async def upload_file(
-        self,
-        file_path: str,
-    ):
-        object_name = file_path.split("/")[-1]
-        async with self.get_client() as client:
-            with open(file_path, "rb") as file:
-                await client.put_object(
-                    Bucket=self.bucket_name,
-                    Key=object_name,
-                    Body=file,
-                )
-
-    async def delete_file(self, object_name: str):
-        async with self.get_client() as client:
-            await client.delete_object(
-                Bucket=self.bucket_name,
-                Key=object_name,
-            )
-
-    async def get_file(
-        self,
-        object_name: str,
-        destination_path: str,
-    ):
-        async with self.get_client() as client:
-            response = await client.get_object(
-                Bucket=self.bucket_name,
-                Key=object_name,
-            )
-            data = await response["Body"].read()
-            with open(destination_path, "wb") as file:
-                file.write(data)
-
     async def upload_text(self, text: str, object_name: str) -> str:
         async with self.get_client() as client:
             await client.put_object(

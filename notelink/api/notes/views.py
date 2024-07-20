@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, Query
 from fastapi import status
 from fastapi_users.schemas import BaseUser
 from sqlalchemy import select
@@ -85,7 +85,10 @@ async def get_public_note(
     status_code=status.HTTP_200_OK,
 )
 async def get_private_note(
-    session: Annotated[AsyncSession, Depends(db_helper.session_getter)],
+    session: Annotated[
+        AsyncSession,
+        Depends(db_helper.session_getter),
+    ],
     private_id: str,
     current_user: BaseUser = Depends(get_current_verified_user),
 ):
@@ -94,7 +97,7 @@ async def get_private_note(
     )
     note = private_notes.scalars().first()
     if not note:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        raise NotFound()
     note_data = NoteSchema.from_orm(note).dict()
     if note.s3_key:
         note_data["text"] = await s3_client.get_text(note.s3_key)
