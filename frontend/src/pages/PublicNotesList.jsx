@@ -1,16 +1,20 @@
 import React from 'react';
 
-const PublicNotesList = ({ notes }) => {
+const PublicNotePage = ({ notes }) => {
   return (
     <div>
-      <h1>Public Notes</h1>
+      <h1>Недавние записи</h1>
       <ul>
         {notes.map(note => (
-          <li key={note.id}>{note.content}</li>
+          <h5 key={note.id} style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ddd' }}>
+            <h2>{note.title}</h2>
+            <p>{note.text}</p>
+            <p><strong>Дата публикации:</strong> {new Date(note.created_at).toLocaleString()}</p>
+          </h5>
         ))}
       </ul>
     </div>
   );
 }
 
-export default PublicNotesList;
+export default PublicNotePage;
