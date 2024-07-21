@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PublicNotesList from "../pages/PublicNotesList.jsx";
+import API_ROUTES from "../config.js";
 
 const PublicNote = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8005/api/v1/notes/public/")
+    axios.get(API_ROUTES.PUBLIC_NOTES)
       .then(response => {
         setNotes(response.data);
       })
