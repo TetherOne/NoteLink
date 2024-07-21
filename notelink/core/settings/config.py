@@ -17,7 +17,6 @@ class S3StorageConfig(BaseModel):
 
 class APIPrefix(BaseModel):
     prefix: str = "/api"
-    version: str = "/v1"
     notes: str = "/notes"
     tags: str = "/tags"
     users: str = "/users"
@@ -26,7 +25,7 @@ class APIPrefix(BaseModel):
 
     @property
     def full_prefix(self) -> str:
-        return f"{self.prefix}{self.version}"
+        return f"{self.prefix}"
 
     @property
     def full_prefix_for_bearer_transport(self) -> str:
