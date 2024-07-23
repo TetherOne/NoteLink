@@ -8,6 +8,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path={API_ROUTES.PUBLIC_NOTES_PATH} element={<PublicNote />} />
+        <Route path={`${API_ROUTES.PUBLIC_NOTES_PATH}/:publicId`} element={<PublicNote />} /> {/* Используем PublicNote для отображения одной заметки */}
       </Routes>
     </Router>
   );
