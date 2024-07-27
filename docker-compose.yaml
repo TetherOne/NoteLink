@@ -14,6 +14,7 @@ services:
     depends_on:
       - db
       - redis
+      - rabbitmq
 
   db:
     image: postgres
@@ -30,3 +31,16 @@ services:
     restart: on-failure
     ports:
       - "6380:6379"
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: rabbitmq:3-management
+    restart: on-failure
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "15672:15672"
+      - "5672:5672"

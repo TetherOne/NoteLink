@@ -20,6 +20,7 @@ aiobotocore = "^2.13.1"
 aioredis = "^2.0.1"
 redis = "^5.0.7"
 orjson = "^3.10.6"
+aio-pika = "^9.4.2"
 
 
 [tool.poetry.group.lint.dependencies]
