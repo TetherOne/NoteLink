@@ -44,3 +44,13 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  worker:
+    build:
+      context: .
+    restart: on-failure
+    command: celery -A notelink.core.settings.celery worker --loglevel=info
+    volumes:
+      - .:/notelink
+    depends_on:
+      - rabbitmq
