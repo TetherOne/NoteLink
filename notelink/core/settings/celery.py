@@ -1,7 +1,7 @@
 from celery import Celery
 
 celery = Celery(
-    "notelink",
+    "tasks",
     broker="amqp://guest:guest@rabbitmq:5672",
     include=[
         "notelink.api.notes.tasks",
